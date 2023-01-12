@@ -1,7 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect} from "react";
+import superagent from "superagent";
 
 function App() {
+  useEffect(() => {
+    const url = "https://api.adviceslip.com/advice";
+
+    const fetchData = async () => {
+      try {
+        const response = await superagent.get(url);
+        const json = await response.json();
+        console.log(json.slip);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
